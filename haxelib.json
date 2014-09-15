@@ -1,12 +1,13 @@
 {
 	"name": "noisehx",
 	"url": "https://github.com/madhoe",
-	"license": "MIT",
+	"license": "Public",
 	"tags": ["noise", "perlin", "haxe"],
 	"description": "Generate Perlin noise.",
 	"version": "0.0.1",
 	"releasenote": "",
 	"contributors": [
 		"Madhoe"
-	]
+	],
+	"dependencies": { }
 }
