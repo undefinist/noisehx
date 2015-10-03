@@ -84,9 +84,8 @@ class Perlin
 			gradP[i] = gradP[i + 256] = GRAD3[v % 12];
 		}
 	}
-
-	// 2d Perlin noise, outputs range [-1, 1].
-	public function noise2d(x:Float, y:Float):Float
+	
+	private function n2d(x:Float, y:Float):Float
 	{
 		// Find unit grid cell containing point
 		var X:Int = Math.floor(x);
@@ -112,9 +111,8 @@ class Perlin
 		   
 		return result / (Math.sqrt(2) * 0.5); // divide by ~0.707 to get [-1,1] range
 	}
-
-	// 3d Perlin noise, outputs range [-1, 1].
-	public function noise3d(x:Float, y:Float, z:Float):Float
+	
+	private function n3d(x:Float, y:Float, z:Float):Float
 	{
 		// Find unit grid cell containing point
 		var X:Int = Math.floor(x);
@@ -151,6 +149,52 @@ class Perlin
 			v);
 			
 		return result / (Math.sqrt(3) * 0.5); // divide by ~0.87 to get [-1,1] range
+	}
+
+	/**
+	 * 2d Perlin noise.
+	 * @return Value in the range [-1, 1].
+	 */
+	public function noise2d(x:Float, y:Float, octaves:Int = 1, amplitude:Float = 1, persistence:Float = 0.9, lacunarity:Float = 2):Float
+	{
+		if (octaves == 1)
+			return amplitude * n2d(x, y);
+		
+		var sum:Float = 0;
+
+		for (i in 0...octaves)
+		{
+			sum += amplitude * n2d(x, y);
+			amplitude *= persistence;
+			
+			x *= lacunarity;
+			y *= lacunarity;
+		}
+
+		return sum;
+	}
+
+	/**
+	 * 3d Perlin noise.
+	 * @return Value in the range [-1, 1].
+	 */
+	public function noise3d(x:Float, y:Float, z:Float, octaves:Int = 1, amplitude:Float = 1, persistence:Float = 0.9, lacunarity:Float = 2):Float
+	{
+		if (octaves == 1)
+			return amplitude * n3d(x, y, z);
+		
+		var sum:Float = 0;
+
+		for (i in 0...octaves)
+		{
+			sum += amplitude * n3d(x, y, z);
+			amplitude *= persistence;
+			
+			x *= lacunarity;
+			y *= lacunarity;
+		}
+
+		return sum;
 	}
 
 }
