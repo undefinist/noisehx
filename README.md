@@ -1,3 +1,5 @@
+**NOTE: [hxNoise](https://github.com/whuop/hxNoise) is probably better, so use that instead!**
+
 # About
 
 noisehx is a teeny weeny library to generate Perlin noise.
