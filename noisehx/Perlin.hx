@@ -157,14 +157,15 @@ class Perlin
 	 */
 	public function noise2d(x:Float, y:Float, octaves:Int = 1, amplitude:Float = 1, persistence:Float = 0.9, lacunarity:Float = 2):Float
 	{
+		var n2dResult = n2d(x, y);
 		if (octaves == 1)
-			return amplitude * n2d(x, y);
+			return amplitude * n2dResult;
 		
 		var sum:Float = 0;
 
 		for (i in 0...octaves)
 		{
-			sum += amplitude * n2d(x, y);
+			sum += amplitude * n2dResult;
 			amplitude *= persistence;
 			
 			x *= lacunarity;
@@ -180,14 +181,15 @@ class Perlin
 	 */
 	public function noise3d(x:Float, y:Float, z:Float, octaves:Int = 1, amplitude:Float = 1, persistence:Float = 0.9, lacunarity:Float = 2):Float
 	{
+		var n3dResult = n3d(x, y, z);
 		if (octaves == 1)
-			return amplitude * n3d(x, y, z);
+			return amplitude * n3dResult
 		
 		var sum:Float = 0;
 
 		for (i in 0...octaves)
 		{
-			sum += amplitude * n3d(x, y, z);
+			sum += amplitude * n3dResult;
 			amplitude *= persistence;
 			
 			x *= lacunarity;
